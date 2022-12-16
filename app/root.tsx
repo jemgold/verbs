@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -15,11 +15,7 @@ import {
 import globalStyles from "~/styles/app.css";
 import rainbowStyles from "@rainbow-me/rainbowkit/styles.css";
 
-import {
-  ConnectButton,
-  getDefaultWallets,
-  RainbowKitProvider,
-} from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import type { Chain } from "wagmi";
 import { configureChains, createClient, goerli, WagmiConfig } from "wagmi";
 import { mainnet } from "wagmi/chains";
@@ -44,7 +40,7 @@ export const loader: LoaderFunction = () => {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Verbs",
   viewport: "width=device-width,initial-scale=1",
 });
 

@@ -6,7 +6,7 @@ import { interfaces } from "~/utils/nouns";
 import { shortenAddress } from "~/utils/shortenAddress";
 import { NodeWrapper } from "./NodeWrapper";
 
-const TokenNode: FC<NodeProps> = ({ data, xPos, yPos }) => {
+const DAONode: FC<NodeProps> = ({ data, xPos, yPos }) => {
   const connections = ["Token", "Governor", "Treasury", "Auction", "Metadata"];
 
   const implementedConnections = Object.keys(interfaces);
@@ -48,4 +48,4 @@ const TokenNode: FC<NodeProps> = ({ data, xPos, yPos }) => {
   );
 };
 
-export default memo(TokenNode);
+export default memo(DAONode);
