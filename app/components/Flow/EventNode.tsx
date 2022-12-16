@@ -8,7 +8,7 @@ import { Handle, Position } from "reactflow";
 import type { Contract } from "~/utils/nouns";
 import { interfaces } from "~/utils/nouns";
 
-import { Wrapper } from "./Wrapper";
+import { NodeWrapper } from "./NodeWrapper";
 
 export type EventData = {
   name: string;
@@ -35,7 +35,7 @@ const EventNode: FC<NodeProps<EventData>> = ({ data }) => {
   );
 
   return (
-    <Wrapper label="Event">
+    <NodeWrapper name="Event">
       <div className="relative py-4 px-4">
         <select
           id={NAME}
@@ -56,7 +56,7 @@ const EventNode: FC<NodeProps<EventData>> = ({ data }) => {
 
         <Handle type="source" position={Position.Right} id="event" />
       </div>
-    </Wrapper>
+    </NodeWrapper>
   );
 };
 

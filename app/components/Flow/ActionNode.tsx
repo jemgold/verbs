@@ -8,7 +8,7 @@ import type { Contract } from "~/utils/nouns";
 import { interfaces } from "~/utils/nouns";
 import { ParamForm } from "../ParamForm";
 
-import { Wrapper } from "./Wrapper";
+import { NodeWrapper } from "./NodeWrapper";
 
 export type ActionData = {
   name: string;
@@ -38,7 +38,7 @@ const ActionNode: FC<NodeProps<ActionData>> = ({ data, xPos, yPos }) => {
   );
 
   return (
-    <Wrapper label="Action">
+    <NodeWrapper name="Action">
       <div className="py-2">
         <div className="relative py-4 px-4">
           <Handle type="target" position={Position.Left} id={"event"} />
@@ -69,7 +69,7 @@ const ActionNode: FC<NodeProps<ActionData>> = ({ data, xPos, yPos }) => {
           Trigger
         </div>
       </div>
-    </Wrapper>
+    </NodeWrapper>
   );
 };
 

@@ -4,7 +4,7 @@ import type { NodeProps } from "reactflow";
 import { Handle, Position } from "reactflow";
 import { interfaces } from "~/utils/nouns";
 import { shortenAddress } from "~/utils/shortenAddress";
-import { Wrapper } from "./Wrapper";
+import { NodeWrapper } from "./NodeWrapper";
 
 const TokenNode: FC<NodeProps> = ({ data, xPos, yPos }) => {
   const connections = ["Token", "Governor", "Treasury", "Auction", "Metadata"];
@@ -12,7 +12,7 @@ const TokenNode: FC<NodeProps> = ({ data, xPos, yPos }) => {
   const implementedConnections = Object.keys(interfaces);
 
   return (
-    <Wrapper label="DAO">
+    <NodeWrapper name="DAO">
       <div className="flex p-4 border-b border-gray-300 dark:border-gray-600">
         <div className="rounded-full w-12 h-12 flex mr-2">
           <img className="rounded-full" alt={data.name} src={data.image} />
@@ -44,7 +44,7 @@ const TokenNode: FC<NodeProps> = ({ data, xPos, yPos }) => {
           );
         })}
       </div>
-    </Wrapper>
+    </NodeWrapper>
   );
 };
 
