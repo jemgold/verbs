@@ -6,7 +6,13 @@ import { interfaces } from "~/utils/nouns";
 import { shortenAddress } from "~/utils/shortenAddress";
 import { NodeWrapper } from "./NodeWrapper";
 
-const DAONode: FC<NodeProps> = ({ data, xPos, yPos }) => {
+export type DAOData = {
+  name: string;
+  address: string;
+  image: string;
+};
+
+const DAONode: FC<NodeProps<DAOData>> = ({ data, xPos, yPos }) => {
   const connections = ["Token", "Governor", "Treasury", "Auction", "Metadata"];
 
   const implementedConnections = Object.keys(interfaces);

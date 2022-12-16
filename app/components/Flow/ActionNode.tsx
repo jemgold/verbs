@@ -1,37 +1,39 @@
+import type { ChangeEvent, FC } from "react";
+import { memo, useMemo, useCallback, useEffect, useState } from "react";
 import { FunctionFragment } from "ethers/lib/utils";
-import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
-import { useMemo } from "react";
-import { memo } from "react";
 import type { NodeProps } from "reactflow";
 import { Handle, Position } from "reactflow";
+
 import type { Contract } from "~/utils/nouns";
 import { interfaces } from "~/utils/nouns";
 import { ParamForm } from "../ParamForm";
-
 import { NodeWrapper } from "./NodeWrapper";
 
 export type ActionData = {
-  name: string;
+  functionName?: string;
+  contractName?: Contract;
 };
 
-const ActionNode: FC<NodeProps<ActionData>> = ({ data, xPos, yPos }) => {
-  const NAME: Contract = "Auction";
+const ActionNode: FC<NodeProps<ActionData>> = ({ id, data }) => {
+  const { functionName, contractName } = data;
 
   const [action, setAction] = useState<FunctionFragment>();
 
   const actions = useMemo(() => {
-    return Object.values(interfaces[NAME].functions).filter(
-      (a) => a.constant === false,
-    );
-  }, [NAME]);
+    return contractName
+      ? Object.values(interfaces[contractName].functions).filter(
+          (a) => a.constant === false,
+        )
+      : [];
+  }, [contractName]);
 
   useEffect(() => {
-    setAction(actions.find((a) => a.name === data.name) || actions[0]);
-  }, [actions, data.name]);
+    actions.length &&
+      setAction(actions.find((a) => a.name === functionName) || actions[0]);
+  }, [actions, functionName]);
 
   const handleChange = useCallback(
     (evt: ChangeEvent<HTMLSelectElement>) => {
-      console.log(evt.target.value);
       setAction(actions.find((e) => e.name === evt.target.value));
     },
     [actions],
@@ -44,15 +46,16 @@ const ActionNode: FC<NodeProps<ActionData>> = ({ data, xPos, yPos }) => {
           <Handle type="target" position={Position.Left} id={"event"} />
 
           <select
-            id="action"
+            id={id}
             className="select"
             value={action?.name}
             onChange={handleChange}
+            disabled={!actions.length}
           >
             {actions.map((action) => {
               return (
                 <option
-                  key={`${NAME}/${action.name}/${action.inputs.length}`}
+                  key={`${contractName}/${action.name}/${action.inputs.length}`}
                   value={action.name}
                 >
                   {action.name}

@@ -6,15 +6,18 @@ import { json, LoaderFunction } from "@remix-run/node";
 import { Edge, Node, ReactFlowProvider } from "reactflow";
 import { useLoaderData } from "@remix-run/react";
 import { DragEvent, DragEventHandler } from "react";
+import { ActionData } from "~/components/Flow/ActionNode";
+import { DAOData } from "~/components/Flow/DAONode";
+import { EventData } from "~/components/Flow/EventNode";
 
 const items = ["dao", "address", "event", "action"];
 
 export const loader: LoaderFunction = () => {
-  const initialNodes: Node[] = [
+  const initialNodes: Node<ActionData | DAOData | EventData | any>[] = [
     {
       id: "2",
       type: "action",
-      data: { name: "settleAuction" },
+      data: { contractName: "Auction", functionName: "settleAuction" },
       position: { x: 384, y: 256 },
     },
     // {
@@ -36,13 +39,13 @@ export const loader: LoaderFunction = () => {
     {
       id: "4",
       type: "event",
-      data: { eventName: "ProposalCreated" },
+      data: { contractName: "Governor", eventName: "ProposalCreated" },
       position: { x: 384, y: 0 },
     },
     {
       id: "5",
       type: "event",
-      data: { eventName: "VoteCast" },
+      data: { contractName: "Governor", eventName: "VoteCast" },
       position: { x: 384, y: 128 },
     },
   ];

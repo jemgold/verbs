@@ -1,4 +1,4 @@
-import { DragEvent, useCallback } from "react";
+import { DragEvent, useCallback, useRef } from "react";
 import ReactFlow, {
   useNodesState,
   useEdgesState,
@@ -6,22 +6,19 @@ import ReactFlow, {
   Background,
   BackgroundVariant,
   Controls,
-  Panel,
   useReactFlow,
 } from "reactflow";
 import type { Connection, Node, Edge } from "reactflow";
 
 import CustomNode from "./CustomNode";
-import DAONode from "./TokenNode";
+import DAONode from "./DAONode";
 import EventNode from "./EventNode";
 import ActionNode from "./ActionNode";
-import { useRef } from "react";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const nodeTypes = {
-  custom: CustomNode,
   dao: DAONode,
   event: EventNode,
   action: ActionNode,

@@ -11,21 +11,23 @@ import { interfaces } from "~/utils/nouns";
 import { NodeWrapper } from "./NodeWrapper";
 
 export type EventData = {
-  name: string;
+  contractName?: Contract;
+  eventName?: string;
 };
 
-const EventNode: FC<NodeProps<EventData>> = ({ data }) => {
-  const NAME: Contract = "Governor";
+const EventNode: FC<NodeProps<EventData>> = ({ id, data }) => {
+  const { contractName, eventName } = data;
 
   const [event, setEvent] = useState<EventFragment>();
 
   const events = useMemo(() => {
-    return Object.values(interfaces[NAME].events);
-  }, [NAME]);
+    return contractName ? Object.values(interfaces[contractName].events) : [];
+  }, [contractName]);
 
   useEffect(() => {
-    setEvent(events.find((e) => e.name === data.name) || events[0]);
-  }, [events, data.name]);
+    events.length &&
+      setEvent(events.find((e) => e.name === eventName) || events[0]);
+  }, [events, eventName]);
 
   const handleChange = useCallback(
     (evt: ChangeEvent<HTMLSelectElement>) => {
@@ -38,7 +40,7 @@ const EventNode: FC<NodeProps<EventData>> = ({ data }) => {
     <NodeWrapper name="Event">
       <div className="relative py-4 px-4">
         <select
-          id={NAME}
+          id={id}
           className="select"
           value={event?.name}
           onChange={handleChange}
