@@ -43,7 +43,7 @@ const ActionNode: FC<NodeProps<ActionData>> = ({ id, data }) => {
     <NodeWrapper name="Action">
       <div>
         <div className="relative py-4 px-4">
-          <Handle type="target" position={Position.Left} id={"event"} />
+          <Handle type="target" position={Position.Left} id="contractAddress" />
 
           <select
             id={id}

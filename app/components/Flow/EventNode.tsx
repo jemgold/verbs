@@ -54,7 +54,11 @@ const EventNode: FC<NodeProps<EventData>> = ({ id, data }) => {
           })}
         </select>
 
-        <Handle type="target" position={Position.Left} id="contract" />
+        <Handle
+          type="target"
+          position={Position.Left}
+          id="contractAddress-input"
+        />
 
         <Handle type="source" position={Position.Right} id="event" />
       </div>

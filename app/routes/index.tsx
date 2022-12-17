@@ -5,10 +5,11 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { json, LoaderFunction } from "@remix-run/node";
 import { Edge, Node, ReactFlowProvider } from "reactflow";
 import { useLoaderData } from "@remix-run/react";
-import { DragEvent, DragEventHandler } from "react";
+import { DragEvent, DragEventHandler, useEffect } from "react";
 import { ActionData } from "~/components/Flow/ActionNode";
 import { DAOData } from "~/components/Flow/DAONode";
 import { EventData } from "~/components/Flow/EventNode";
+import { useStore } from "~/store";
 
 const items = ["dao", "address", "event", "action"];
 
@@ -114,6 +115,12 @@ const Palette = ({ items }: PaletteProps) => {
 
 export default function Index() {
   const { flow } = useLoaderData<typeof loader>();
+
+  useEffect(() => {
+    const { nodes, edges } = flow;
+    useStore.setState({ nodes, edges });
+  }, [flow]);
+
   return (
     <div className="h-screen flex flex-col dark:bg-gray-700">
       <header className="flex py-2 px-2 justify-between items-center">

@@ -26,6 +26,7 @@ specifiers:
   tailwindcss: ^3.2.4
   typescript: ^4.9.4
   wagmi: ^0.9.4
+  zustand: ^4.1.5
 
 dependencies:
   '@rainbow-me/rainbowkit': 0.8.1_jsakjzyraeekonzdx6rokcorea
@@ -43,6 +44,7 @@ dependencies:
   reactflow: 11.3.3_biqbaboplfbrettd7655fr4n2y
   remix-utils: 5.1.0_s4ydexb24emqv4lcnmufnxrrxe
   wagmi: 0.9.4_5fkdkfy2bkgsnhvxgn477z7iae
+  zustand: 4.1.5_react@18.2.0
 
 devDependencies:
   '@remix-run/dev': 1.9.0_mkzy6tkjmjsmfnxs5znqfowy5i
