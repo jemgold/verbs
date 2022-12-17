@@ -41,7 +41,7 @@ const ActionNode: FC<NodeProps<ActionData>> = ({ id, data }) => {
 
   return (
     <NodeWrapper name="Action">
-      <div className="py-2">
+      <div>
         <div className="relative py-4 px-4">
           <Handle type="target" position={Position.Left} id={"event"} />
 
@@ -64,12 +64,12 @@ const ActionNode: FC<NodeProps<ActionData>> = ({ id, data }) => {
             })}
           </select>
         </div>
-        <div className="font-bold text-sm px-4 py-2 uppercase relative">
-          <ParamForm params={action?.inputs} />
-        </div>
-        <div className="font-bold text-sm px-4 py-2 uppercase relative dark:text-white">
+        {action?.inputs.length ? <ParamForm params={action?.inputs} /> : null}
+        <div className="px-4 py-4 relative flex justify-center">
           <Handle type="target" position={Position.Left} id={"trigger"} />
-          Trigger
+          <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            Trigger
+          </button>
         </div>
       </div>
     </NodeWrapper>

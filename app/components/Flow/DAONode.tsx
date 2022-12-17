@@ -12,14 +12,15 @@ export type DAOData = {
   image: string;
 };
 
-const DAONode: FC<NodeProps<DAOData>> = ({ data, xPos, yPos }) => {
+const DAONode: FC<NodeProps<DAOData>> = ({ data }) => {
   const connections = ["Token", "Governor", "Treasury", "Auction", "Metadata"];
 
   const implementedConnections = Object.keys(interfaces);
 
   return (
     <NodeWrapper name="DAO">
-      <div className="flex p-4 border-b border-gray-300 dark:border-gray-600">
+      <div className="flex p-4 border-b border-gray-300 dark:border-gray-600 relative">
+        <Handle type="target" position={Position.Left} id="address" />
         <div className="rounded-full w-12 h-12 flex mr-2">
           <img className="rounded-full" alt={data.name} src={data.image} />
         </div>
