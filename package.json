@@ -30,6 +30,7 @@
     "buffer-polyfill": "npm:buffer@^6.0.3",
     "cross-env": "^7.0.3",
     "ethers": "^5.7.2",
+    "eventemitter3": "^4.0.7",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

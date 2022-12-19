@@ -26,6 +26,7 @@ specifiers:
   cross-env: ^7.0.3
   eslint: ^8.29.0
   ethers: ^5.7.2
+  eventemitter3: ^4.0.7
   postcss: ^8.4.20
   react: ^18.2.0
   react-dnd: ^16.0.1
@@ -58,6 +59,7 @@ dependencies:
   buffer-polyfill: /buffer/6.0.3
   cross-env: 7.0.3
   ethers: 5.7.2
+  eventemitter3: 4.0.7
   react: 18.2.0
   react-dnd: 16.0.1_kzbn2opkn2327fwg5yzwzya5o4
   react-dnd-html5-backend: 16.0.1
@@ -2280,6 +2282,7 @@ packages:
   /@remix-run/dev/1.9.0_mkzy6tkjmjsmfnxs5znqfowy5i:
     resolution: {integrity: sha512-4EEctL2lo7eLPbVkzVBuRW+TX1B9yNdR9Ug7z7PYwFvJF0Oy9PovGx7ooVIypNiWLGOztKgN+K3c9jdffsrYYQ==}
     engines: {node: '>=14'}
+    hasBin: true
     peerDependencies:
       '@remix-run/serve': ^1.9.0
     peerDependenciesMeta:
@@ -3758,6 +3761,7 @@ packages:
   /autoprefixer/10.4.13_postcss@8.4.20:
     resolution: {integrity: sha512-49vKpMqcZYsJjwotvt4+h/BCjJVnhGwcLpDt5xkcaOG3eLrG/HUYLagrihYsQ+qrIBgIzX1Rw7a6L8I/ZA1Atg==}
     engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
@@ -7140,6 +7144,7 @@ packages:
 
   /jscodeshift/0.13.1_@babel+preset-env@7.20.2:
     resolution: {integrity: sha512-lGyiEbGOvmMRKgWk4vf+lUrCWO/8YR8sUR3FKF1Cq5fovjZDlIcw3Hu5ppLHAnEXshVffvaM0eyuY/AbOeYpnQ==}
+    hasBin: true
     peerDependencies:
       '@babel/preset-env': ^7.1.6
     dependencies:
@@ -9813,6 +9818,7 @@ packages:
   /tailwindcss/3.2.4_postcss@8.4.20:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
+    hasBin: true
     peerDependencies:
       postcss: ^8.0.9
     dependencies:
@@ -9994,6 +10000,7 @@ packages:
   /ts-node/8.9.1_typescript@4.3.4:
     resolution: {integrity: sha512-yrq6ODsxEFTLz0R3BX2myf0WBCSQh9A+py8PBo1dCzWIOcvisbyH6akNKqDHMgXePF2kir5mm5JXJTH3OUJYOQ==}
     engines: {node: '>=6.0.0'}
+    hasBin: true
     peerDependencies:
       typescript: '>=2.7'
     dependencies:
@@ -10238,6 +10245,7 @@ packages:
 
   /update-browserslist-db/1.0.10_browserslist@4.21.4:
     resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
+    hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
