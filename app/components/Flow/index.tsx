@@ -1,4 +1,4 @@
-import { DragEvent, useCallback, useEffect, useRef } from "react";
+import { DragEvent, useCallback, useEffect, useRef, useState } from "react";
 import ReactFlow, {
   useNodesState,
   useEdgesState,
@@ -7,9 +7,12 @@ import ReactFlow, {
   BackgroundVariant,
   Controls,
   useReactFlow,
+  NodeChange,
+  XYPosition,
+  OnConnectStartParams,
 } from "reactflow";
 import type { Connection, Node, Edge } from "reactflow";
-import shallow from "zustand/shallow";
+import { v4 as uuidv4 } from "uuid";
 
 import DAONode from "./DAONode";
 import EventNode from "./EventNode";
@@ -18,7 +21,6 @@ import ActionNode from "./ActionNode";
 import { RFState, useStore } from "../../store";
 
 let id = 0;
-const getId = () => `dndnode_${id++}`;
 
 const nodeTypes = {
   dao: DAONode,
@@ -43,61 +45,129 @@ function Flow({ initialEdges, initialNodes }: FlowProps) {
   const reactFlowInstance = useReactFlow();
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
 
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore(
-    selector,
-    shallow,
-  );
-
-  // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  // const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  // const onConnect = useCallback(
-  //   (params: Connection | Edge) => {
-  //     setEdges((eds) =>
-  //       addEdge(
-  //         {
-  //           ...params,
-  //           animated: params.targetHandle === "contractAddress-input",
-  //         },
-  //         eds,
-  //       ),
-  //     );
-  //   },
-  //   [setEdges],
+  // const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore(
+  //   selector,
+  //   shallow,
   // );
+
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const [lastConnectStart, setLastConnectStart] =
+    useState<OnConnectStartParams>();
+
+  const onConnect = useCallback(
+    (connection: Connection) => {
+      if (connection.source === null) return;
+      if (connection.target === null) return;
+
+      const newEdge: Edge = {
+        id: uuidv4(),
+        source: connection.source,
+        target: connection.target,
+        sourceHandle: connection.sourceHandle,
+        targetHandle: connection.targetHandle,
+        animated: connection.targetHandle === "contractAddress",
+      };
+
+      onEdgesChange([
+        {
+          type: "add",
+          item: newEdge,
+        },
+      ]);
+
+      if (connection.targetHandle === "contractAddress") {
+        // const sourceNode = nodes.find((n) => n.id === newEdge.source);
+
+        // const { contractAddress } = sourceNode?.data;
+        // console.log(sourceNode);
+
+        console.log(connection);
+
+        setNodes((nxs) =>
+          nxs.map((n) => {
+            if (n.id !== newEdge.target) {
+              return n;
+            }
+            return {
+              ...n,
+              data: {
+                ...n.data,
+                contractName: connection.sourceHandle,
+              },
+            };
+          }),
+        );
+      }
+
+      // if (targetNode?.type === "event") {
+      //   onNodesChange([
+      //     {
+      //       type: ''
+      //       id: newEdge.target,
+      //       item: {
+      //         ...targetNode.data,
+      //         contractName: "foo",
+      //       },
+      //     },
+      //   ]);
+      // }
+    },
+    [onEdgesChange, nodes],
+  );
 
   const handleDragOver = useCallback((event: DragEvent) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "copy";
   }, []);
 
-  // const handleDrop = useCallback(
-  //   (event: DragEvent) => {
-  //     event.preventDefault();
+  const handleAddNode = useCallback(
+    (nodeType: string, position: XYPosition) => {},
+    [nodes, onEdgesChange, onNodesChange],
+  );
 
-  //     const reactFlowBounds = reactFlowWrapper.current?.getBoundingClientRect();
-  //     const type = event.dataTransfer.getData("application/reactflow");
+  const handleDrop = useCallback(
+    (event: DragEvent) => {
+      event.preventDefault();
 
-  //     // check if the dropped element is valid
-  //     if (typeof type === "undefined" || !type) {
-  //       return;
-  //     }
+      const reactFlowBounds = reactFlowWrapper.current?.getBoundingClientRect();
 
-  //     const position = reactFlowInstance.project({
-  //       x: event.clientX - reactFlowBounds.left,
-  //       y: event.clientY - reactFlowBounds.top,
-  //     });
-  //     const newNode = {
-  //       id: getId(),
-  //       type,
-  //       position,
-  //       data: { label: `${type} node` },
-  //     };
+      const type = event.dataTransfer.getData("application/reactflow");
 
-  //     setNodes((nds) => nds.concat(newNode));
-  //   },
-  //   [reactFlowInstance],
-  // );
+      // check if the dropped element is valid
+      if (typeof type === "undefined" || !type) {
+        return;
+      }
+
+      const position = reactFlowInstance.project({
+        x: event.clientX - reactFlowBounds.left,
+        y: event.clientY - reactFlowBounds.top,
+      });
+
+      let data = {};
+
+      switch (type) {
+        case "event": {
+          data = { contractName: "", eventName: "" };
+        }
+      }
+
+      const newNode: Node = {
+        id: uuidv4(),
+        type,
+        position,
+        data: data,
+      };
+
+      // console.log(newNode);
+
+      onNodesChange([{ type: "add", item: newNode }]);
+
+      // setNodes((nds) => nds.concat(newNode));
+    },
+    [reactFlowInstance],
+  );
 
   return (
     <div ref={reactFlowWrapper} className="h-full w-full">
@@ -108,7 +178,7 @@ function Flow({ initialEdges, initialNodes }: FlowProps) {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onDragOver={handleDragOver}
-        // onDrop={handleDrop}
+        onDrop={handleDrop}
         nodeTypes={nodeTypes}
         snapToGrid
         snapGrid={[16, 16]}
