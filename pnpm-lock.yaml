@@ -14,6 +14,7 @@ specifiers:
   autoprefixer: ^10.4.13
   buffer-polyfill: npm:buffer@^6.0.3
   concurrently: ^7.6.0
+  createUtils: link:@vanilla-extract/sprinkles/createUtils
   cross-env: ^7.0.3
   eslint: ^8.29.0
   ethers: ^5.7.2
@@ -37,6 +38,7 @@ dependencies:
   '@remix-run/vercel': 1.9.0_biqbaboplfbrettd7655fr4n2y
   '@zoralabs/nouns-protocol': 1.0.1
   buffer-polyfill: /buffer/6.0.3
+  createUtils: link:@vanilla-extract/sprinkles/createUtils
   cross-env: 7.0.3
   ethers: 5.7.2
   react: 18.2.0

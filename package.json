@@ -19,6 +19,7 @@
     "@remix-run/vercel": "^1.9.0",
     "@zoralabs/nouns-protocol": "^1.0.1",
     "buffer-polyfill": "npm:buffer@^6.0.3",
+    "createUtils": "link:@vanilla-extract/sprinkles/createUtils",
     "cross-env": "^7.0.3",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
