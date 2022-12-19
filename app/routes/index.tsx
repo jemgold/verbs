@@ -10,11 +10,14 @@ import { ActionData } from "~/components/Flow/ActionNode";
 import { DAOData } from "~/components/Flow/DAONode";
 import { EventData } from "~/components/Flow/EventNode";
 import { useStore } from "~/store";
+import { ArtworkData } from "~/components/Flow/ArtworkNode";
 
 const items = ["dao", "address", "event", "action"];
 
 export const loader: LoaderFunction = () => {
-  const initialNodes: Node<ActionData | DAOData | EventData | any>[] = [
+  const initialNodes: Node<
+    ActionData | DAOData | EventData | ArtworkData | any
+  >[] = [
     {
       id: "2",
       type: "action",
@@ -48,6 +51,34 @@ export const loader: LoaderFunction = () => {
       type: "event",
       data: { contractName: "Governor", eventName: "VoteCast" },
       position: { x: 384, y: 128 },
+    },
+    {
+      id: "6",
+      type: "propertySpace",
+      data: {
+        properties: {
+          foo: "bar",
+          baz: "qux",
+        },
+      },
+      position: {
+        x: 0,
+        y: 512,
+      },
+    },
+    {
+      id: "7",
+      type: "artwork",
+      data: {
+        properties: {
+          foo: "bar",
+          baz: "qux",
+        },
+      },
+      position: {
+        x: 384,
+        y: 512,
+      },
     },
   ];
 

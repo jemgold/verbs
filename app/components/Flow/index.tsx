@@ -16,6 +16,8 @@ import EventNode from "./EventNode";
 import ActionNode from "./ActionNode";
 
 import { RFState, useStore } from "../../store";
+import { ArtworkNode } from "./ArtworkNode";
+import { PropertySpaceNode } from "./PropertySpaceNode";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -24,6 +26,8 @@ const nodeTypes = {
   dao: DAONode,
   event: EventNode,
   action: ActionNode,
+  artwork: ArtworkNode,
+  propertySpace: PropertySpaceNode,
 };
 
 type FlowProps = {
