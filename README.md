@@ -4,6 +4,8 @@
 
 [Mint Idea](https://create.zora.co/collections/0xdee7061b1c265e3a4a147426b5b98c75a66c149f) to fund development
 
+![Verbs screenshot](https://zora-prod.mypinata.cloud/ipfs/bafkreidftjh4jhkicpah4qwnhyatdw3kochhn435cgkcx2p53crjylu2qe)
+
 ## What
 
 Verbs is a visual, flow-based imagination environment for the Nouns ecosystem. It features a set of widgets for interacting with on-chain entities, including:
@@ -39,13 +41,13 @@ e.g. `ZoraNFTCreatorV1::createDrop()`, `IGovernor::propose()`
 ## Installation
 
 ```sh
-pnpm install
+yarn install
 ```
 
 ### Start Dev Server
 
 ```sh
-pnpm dev
+yarn dev
 ```
 
 Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
